@@ -1,0 +1,29 @@
+{
+  "name": "Book-Applicatrion",
+  "version": "1.0.0",
+  "description": "This will be a front end static, HTML/CSS, Front end logic, back end with API documentation",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bigrig72/Book-Applicatrion.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bigrig72/Book-Applicatrion/issues"
+  },
+  "homepage": "https://github.com/Bigrig72/Book-Applicatrion#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "env": "0.0.2",
+    "express": "^4.16.4",
+    "pg": "^7.7.1",
+    "superagent": "^4.0.0"
+  }
+}
