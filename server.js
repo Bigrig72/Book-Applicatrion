@@ -22,6 +22,7 @@ app.set('view engine', 'ejs');
 
 // allow public acces to our api
 app.use(cors());
+app.use(express.static('./public'));
 
 // listening to server
 app.listen(PORT, () => {
