@@ -23,11 +23,8 @@ app.set('view engine', 'ejs');
 // allow public acces to our api
 app.use(cors());
 app.use(express.static('./public'));
+app.use(express.urlencoded({ extended: true }));
 
-// listening to server
-app.listen(PORT, () => {
-  console.log(`listening on ${PORT}`)
-});
 
 // routes
 
@@ -36,3 +33,45 @@ app.get('/', (request, response) => {
 });
 
 
+// app,get('/', getTasks);
+// app.get('/add', showForm);
+app.post('/searches', getBooks);
+
+
+// Book model
+
+function Book(data) {
+  this.title = data.title;
+  this.image = data.imageLinks.smallThumbnail;
+  this.authors = data.authors[0];
+  this.summary = data.description;
+
+}
+
+function getBooks(request, response) {
+
+  let _URL = `https://www.googleapis.com/books/v1/volumes?q=`;
+
+  console.log('request.body.search', request.body.search);
+
+  if (request.body.search[1] === 'title') {
+    _URL += `+intitle:${request.body.search[0]}`;
+  }
+
+
+  if (request.body.search[1] === 'author') {
+    _URL += `+inauthor:${request.body.search[0]}`;
+  }
+
+  superagent.get(_URL)
+    .then(apiResults => apiResults.body.items.map(book => new Book(book.volumeInfo)))
+    .then(results => response.render('../public/views/pages/searches/show', {results: results}))
+    .catch(error => console.log(error));
+
+
+}
+
+// listening to server
+app.listen(PORT, () => {
+  console.log(`listening on ${PORT}`)
+});

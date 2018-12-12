@@ -22,14 +22,12 @@
 
   <main>
     <form class ="bookform" action="/searches" method="post">
-      <label> 
-        <input type="text" name="booksearch" placeholder="Enter a title or Author" >
+       <input type="text" name="search" placeholder="Enter a title or Author" >
+      <label for="title">  Title
+        <input type="radio" value="title" name="search">
       </label>
-      <label> Title
-        <input type="radio" name="title">
-      </label>
-      <label> Author
-        <input type="radio" name="author">
+      <label for="author"> Author
+        <input type="radio" value="author" name="search">
       </label>
 
       <input type="submit" value="Search the Google Books API">
