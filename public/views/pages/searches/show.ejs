@@ -4,17 +4,19 @@
 <head>
   <title>Rendered Books</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Sirin+Stencil" rel="stylesheet">
   <link rel="stylesheet" href="/styles/base.css" />
 </head>
 
 <body>
 
   <main>
+    <h2>Book Results</h2>
     <section>
       <% results.forEach( book => { %>
-<section>
+<section class="render">
       <img src="<%= book.image %>">
-      <p><%= book.title %></p>
+      <p id="imagetitle"><%= book.title %></p>
       <p><%= book.author %></p>
       <p><%= book.summary %></p>
     </section>
