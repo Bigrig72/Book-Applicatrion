@@ -11,3 +11,5 @@ CREATE TABLE books (
   description TEXT,
   bookshelf VARCHAR(255)
 );
+
+INSERT INTO books (author, title, isbn, image_url, description, bookshelf) VALUES ('do some shit', 'brian', 'FALSE', 'things that we do', 'when i do certain things i do shit', 'let do it');

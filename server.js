@@ -14,7 +14,7 @@ require('dotenv').config();
 
 //specific database connection path
 //TODO: 
-const client = new pg.Client(`${DATABASE_URL}`);
+const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err)); 
 
@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes
 app.get('/', (request, response) => {
-  response.render('../public/views/pages/index');
+  response.render('/views/pages/index');
 });
 // path from db
 app.get('/', booksDB);
@@ -44,8 +44,15 @@ function booksDB(request, response) {
 
   return client.query(SQL)
   // check pathway on 'index' pathway - tablename.rows as of now table is books
-  .then( results => response.render('index', { results: books.rows }))
-  .catch(err => console.error(err));
+
+  .then( results => { 
+    console.log(books);
+    // mess with pages/index pathway after class
+    response.render('views/pages/index', {books: results.rows})})
+    
+    .catch(error => console.log(error));
+  // .then( results => response.render('../public/views/pages/index', { results: books.rows }))
+  // .catch(err => console.error(err));
 }
 
 
@@ -77,7 +84,7 @@ function getBooks(request, response) {
   superagent.get(_URL)
     .then(apiResults => apiResults.body.items.map(book => new Book(book.volumeInfo)))
 
-    .then(results => response.render('../public/views/pages/searches/show', {results: results}))
+    .then( results => response.render('../public/views/pages/searches/show', {results: results}))
     
     .catch(error => console.log(error));
 }

@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="/styles/base.css" />
   <link rel="stylesheet" href="/styles/modules.css" />
   <link rel="stylesheet" href="/styles/icons.css" />
+  
 <!-- put head component here -->
+
 </head>
 
 <body>
@@ -24,7 +26,7 @@
   <main>
    <section class="book-view container">
     <ul id="book-list">
-      <% results.forEach(task => { %>
+      <% books.forEach(task => { %>
         <li class="book-item" data-id="<% book.id %>">
           <p>Book: <%= book.title %></p>
           <p>Author: <%= book.author %></p>
