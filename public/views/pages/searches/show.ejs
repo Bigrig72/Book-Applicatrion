@@ -1,0 +1,28 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+  <title>Rendered Books</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/styles/base.css" />
+</head>
+
+<body>
+
+  <main>
+    <section>
+      <% results.forEach( book => { %>
+<section>
+      <img src="<%= book.image %>">
+      <p><%= book.title %></p>
+      <p><%= book.author %></p>
+      <p><%= book.summary %></p>
+    </section>
+    <% }) %>
+    </section>
+
+  </main>
+
+</body>
+
+</html>

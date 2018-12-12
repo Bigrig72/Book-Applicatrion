@@ -33,8 +33,8 @@ app.get('/', (request, response) => {
 });
 
 
-// app,get('/', getTasks);
-// app.get('/add', showForm);
+
+
 app.post('/searches', getBooks);
 
 
@@ -51,14 +51,11 @@ function Book(data) {
 function getBooks(request, response) {
 
   let _URL = `https://www.googleapis.com/books/v1/volumes?q=`;
-
   console.log('request.body.search', request.body.search);
 
   if (request.body.search[1] === 'title') {
     _URL += `+intitle:${request.body.search[0]}`;
   }
-
-
   if (request.body.search[1] === 'author') {
     _URL += `+inauthor:${request.body.search[0]}`;
   }
@@ -67,9 +64,11 @@ function getBooks(request, response) {
     .then(apiResults => apiResults.body.items.map(book => new Book(book.volumeInfo)))
     .then(results => response.render('../public/views/pages/searches/show', {results: results}))
     .catch(error => console.log(error));
-
-
 }
+
+
+// app.get('../views/pages/searches/show');
+
 
 // listening to server
 app.listen(PORT, () => {
