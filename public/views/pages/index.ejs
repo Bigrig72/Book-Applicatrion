@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -11,37 +11,32 @@
   <link rel="stylesheet" href="/styles/base.css" />
   <link rel="stylesheet" href="/styles/modules.css" />
   <link rel="stylesheet" href="/styles/icons.css" />
-
+<!-- put head component here -->
 </head>
 
 <body>
 
   <header>
-    <h1> Search by Title or Author</h1>
-    </h1>
+    <h1> Saved Library</h1>
+    <!-- put our header component here -->
   </header>
 
   <main>
-    <form class="bookform" action="/searches" method="post">
-      <input type="text" name="search" placeholder="Enter a title or Author">
-      <label for="title"> Title
-        <input type="radio" value="title" name="search">
-      </label>
-      <label for="author"> Author
-        <input type="radio" value="author" name="search">
-      </label>
-
-      <input type="submit" value="Search the Google Books API">
-
-
-    </form>
-
+   <section class="book-view container">
+    <ul id="book-list">
+      <% results.forEach(task => { %>
+        <li class="book-item" data-id="<% book.id %>">
+          <p>Book: <%= book.title %></p>
+          <p>Author: <%= book.author %></p>
+          <p>Summary: <%= book.summary %></p>
+          <a href="/detail/<%= book.id %>">View Details </a>
+        </li>
+      <% }) %>
+    </ul>
+   </section>
   </main>
 
-
-  <footer>
-
-  </footer>
+  <footer></footer>
 
 
 
