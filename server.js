@@ -33,8 +33,6 @@ app.get('/', (request, response) => {
 });
 
 
-
-
 app.post('/searches', getBooks);
 
 
@@ -62,12 +60,14 @@ function getBooks(request, response) {
 
   superagent.get(_URL)
     .then(apiResults => apiResults.body.items.map(book => new Book(book.volumeInfo)))
+
     .then(results => response.render('../public/views/pages/searches/show', {results: results}))
+    
     .catch(error => console.log(error));
 }
 
 
-// app.get('../views/pages/searches/show');
+
 
 
 // listening to server
