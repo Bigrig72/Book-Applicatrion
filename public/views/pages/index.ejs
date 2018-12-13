@@ -26,12 +26,12 @@
   <main>
    <section class="book-view container">
     <ul id="book-list">
-      <% results.forEach(item => { %>
+      <% results.forEach(book => { %>
         <li class="book-item" data-id="<% book.id %>">
-          <p>Book: <%= item.title %></p>
-          <p>Author: <%= item.author %></p>
-          <p>Summary: <%= item.summary %></p>
-          <a href="/detail/<%= item.id %>">View Details </a>
+          <p>Book: <%= book.title %></p>
+          <p>Author: <%= book.author %></p>
+          <p>Summary: <%= book.summary %></p>
+          <a href="/detail/<%= book.id %>">View Details </a>
         </li>
       <% }) %>
     </ul>
