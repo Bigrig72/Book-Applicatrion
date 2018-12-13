@@ -7,7 +7,7 @@ const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
 const pg = require('pg');
-const ejs = require('ejs');
+
 
 // pull in project specific enviroment variables
 require('dotenv').config();
@@ -25,38 +25,34 @@ const app = express();
 // set server side view engine
 app.set('view engine', 'ejs');
 
-// allow public acces to our api - middleware
-app.use(cors());
+
 app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 
 
 // routes
-app.get('/', (request, response) => {
-  response.render('/views/pages/index');
-});
+// app.get('/', (request, response) => {
+//   response.render('pages');
+// });
+
 // path from db
 app.get('/', booksDB);
 
-function booksDB(request, response) {
+app.post('/searches', getBooks);
+
+function booksDB (request, response) {
   // our table NEEDS to be named books with this syntax
-  let SQL = 'SELECT * from books;';
+ let SQL = 'SELECT * from books;';
 
   return client.query(SQL)
-  // check pathway on 'index' pathway - tablename.rows as of now table is books
-
-  .then( results => { 
-    console.log(books);
-    // mess with pages/index pathway after class
-    response.render('views/pages/index', {books: results.rows})})
-    
-    .catch(error => console.log(error));
+  
+  .then( results => response.render('../pages/index', {results: results.rows}))
+  .catch(error => handleError(error, response));
   // .then( results => response.render('../public/views/pages/index', { results: books.rows }))
   // .catch(err => console.error(err));
 }
 
 
-app.post('/searches', getBooks);
 
 
 // Book model

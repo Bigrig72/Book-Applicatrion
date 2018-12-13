@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/styles/base.css" />
   <link rel="stylesheet" href="/styles/modules.css" />
   <link rel="stylesheet" href="/styles/icons.css" />
-  
+
 <!-- put head component here -->
 
 </head>
@@ -22,16 +22,16 @@
     <h1> Saved Library</h1>
     <!-- put our header component here -->
   </header>
-
+  
   <main>
    <section class="book-view container">
     <ul id="book-list">
-      <% books.forEach(task => { %>
+      <% results.forEach(item => { %>
         <li class="book-item" data-id="<% book.id %>">
-          <p>Book: <%= book.title %></p>
-          <p>Author: <%= book.author %></p>
-          <p>Summary: <%= book.summary %></p>
-          <a href="/detail/<%= book.id %>">View Details </a>
+          <p>Book: <%= item.title %></p>
+          <p>Author: <%= item.author %></p>
+          <p>Summary: <%= item.summary %></p>
+          <a href="/detail/<%= item.id %>">View Details </a>
         </li>
       <% }) %>
     </ul>
