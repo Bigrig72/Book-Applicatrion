@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Book App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Sirin+Stencil" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/reset.css" />
+  <link rel="stylesheet" href="/styles/base.css" />
+  <link rel="stylesheet" href="/styles/modules.css" />
+  <link rel="stylesheet" href="/styles/icons.css" />
+
+</head>
+
+<body>
+
+  <header>
+    <h1> Search by Title or Author</h1>
+    </h1>
+  </header>
+
+  <main>
+    <form class="bookform" action="/searches" method="post">
+      <input type="text" name="search" placeholder="Enter a title or Author">
+      <label for="title"> Title
+        <input type="radio" value="title" name="search">
+      </label>
+      <label for="author"> Author
+        <input type="radio" value="author" name="search">
+      </label>
+
+      <input type="submit" value="Search the Google Books API">
+
+
+    </form>
+
+  </main>
+
+
+  <footer>
+
+  </footer>
+
+
+
+
+
+  <script src="server.js"></script>
+</body>
+
+</html>

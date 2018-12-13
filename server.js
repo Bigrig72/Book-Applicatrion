@@ -9,28 +9,51 @@ const superagent = require('superagent');
 const pg = require('pg');
 const ejs = require('ejs');
 
-
+// pull in project specific enviroment variables
 require('dotenv').config();
 
+//specific database connection path
+//TODO: 
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', err => console.error(err)); 
 
-// setup app canstants
+// setup app constants
 const PORT = process.env.PORT;
 const app = express();
 
-// set view engine
+// set server side view engine
 app.set('view engine', 'ejs');
 
-// allow public acces to our api
+// allow public acces to our api - middleware
 app.use(cors());
 app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 
 
 // routes
-
 app.get('/', (request, response) => {
-  response.render('../public/views/pages/index');
+  response.render('/views/pages/index');
 });
+// path from db
+app.get('/', booksDB);
+
+function booksDB(request, response) {
+  // our table NEEDS to be named books with this syntax
+  let SQL = 'SELECT * from books;';
+
+  return client.query(SQL)
+  // check pathway on 'index' pathway - tablename.rows as of now table is books
+
+  .then( results => { 
+    console.log(books);
+    // mess with pages/index pathway after class
+    response.render('views/pages/index', {books: results.rows})})
+    
+    .catch(error => console.log(error));
+  // .then( results => response.render('../public/views/pages/index', { results: books.rows }))
+  // .catch(err => console.error(err));
+}
 
 
 app.post('/searches', getBooks);
@@ -61,14 +84,13 @@ function getBooks(request, response) {
   superagent.get(_URL)
     .then(apiResults => apiResults.body.items.map(book => new Book(book.volumeInfo)))
 
-    .then(results => response.render('../public/views/pages/searches/show', {results: results}))
+    .then( results => response.render('../public/views/pages/searches/show', {results: results}))
     
     .catch(error => console.log(error));
 }
 
-
-
-
+// catch-all route
+app.get('*', (req, res) => res.status(404).send('Not Found'));
 
 // listening to server
 app.listen(PORT, () => {
