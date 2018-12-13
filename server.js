@@ -26,20 +26,23 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: true }));
-//line 30 isnt working...full pathway typed on line 52 to show index
+
+
 app.use(express.static('./public'));
 
-//
 
-// routes
-// app.get('/', (request, response) => {
-//   response.render('pages');
-// });
+app.get('/new', (req, res) => {
+  res.render('../public/views/pages/searches/new');
+});
 
 // path from db
 app.get('/', booksDB);
 
-app.post('/searches', getBooks);
+app.get("../public/views/pages/searches/show");
+
+app.post('/show', getBooks);
+
+
 
 function booksDB(request, response) {
   // our table NEEDS to be named books with this syntax
@@ -57,14 +60,14 @@ function booksDB(request, response) {
 
 function Book(data) {
   this.title = data.title;
-  this.image = data.imageLinks.smallThumbnail;
+  this.image = data.imageLinks.thumbnail;
   this.authors = data.authors[0];
   this.summary = data.description;
 
 }
 
 function getBooks(request, response) {
-
+console.log('insidegetbooksfunction')
   let _URL = `https://www.googleapis.com/books/v1/volumes?q=`;
   console.log('request.body.search', request.body.search);
 
@@ -75,7 +78,7 @@ function getBooks(request, response) {
     _URL += `+inauthor:${request.body.search[0]}`;
   }
 
-  superagent.get(_URL)
+  return superagent.get(_URL)
     .then(apiResults => apiResults.body.items.map(book => new Book(book.volumeInfo)))
 
     .then(results => response.render('../public/views/pages/searches/show', { results: results }))
@@ -83,13 +86,16 @@ function getBooks(request, response) {
     .catch(error => console.log(error));
 }
 
+
+
+
 //errorHandler
 function handleError(error, response) {
   response.render('pages/error-view', {error: 'Oh, something went wrong!'});
 }
 
 // catch-all route
-app.get('*', (req, res) => res.status(404).send('Not Found'));
+// app.get('*', (req, res) => res.status(404).send('Not Found'));
 
 // listening to server
 app.listen(PORT, () => {
