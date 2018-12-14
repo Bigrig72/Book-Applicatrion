@@ -1,0 +1,9 @@
+<form action = "<%= 'update' === formAction ? `/update/${item.id}` : '/save' %>" method = "post">
+  <input type="hidden" name="_method" value="<%- 'update' === formAction ? 'put' : 'post' %>">
+  <label>Title: <input type="text" name="title" value="<%= item.title %>" placeholder="<%= item.title %>"/> </label>
+  <label>Author <input type="text" name="author" value="<%= item.authors %>" placeholder="<%= item.authors %>"/> </label>
+  <label>ISBN <input type="text" name="isbn" value="<%= item.isbn %>" placeholder="<%= item.isbn %>"/> </label>
+  <label>Description <textarea type="text" name="description"value="<%= item.summary %>" cols="30" rows="10" placeholder="<%= item.summary %>"><%= item.summary %></textarea> </label>
+  <label><input type="hidden" name="image" value="<%= item.image %>" ></label>
+  <button type = submit class="<%- 'update' === formAction ? 'db-update-button' : 'api-saveButton'  %>" <%= item.isbn %>"><%- 'update' === formAction ? "Update Book" : "Save Book" %></button>
+</form>

@@ -18,11 +18,18 @@
       <img src="<%= book.image %>">
       <p id="imagetitle"><%= book.title %></p>
       <p><%= book.author %></p>
-      <p><%= book.summary %></p>
+     
+
+      <form action = "/save<%= book.id %>" method="POST">
+        <%- include('../books/edit', {formAction: 'save', item: book}) %>
+       
+      </form>
     </section>
     <% }) %>
   
     </section>
+
+  
 
   </main>
 
