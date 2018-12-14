@@ -28,9 +28,10 @@
     <ul id="book-list">
       <% results.forEach(book => { %>
         <li class="book-item" data-id="<% book.id %>">
+            <img src="<%= book.image %>">
           <p>Book: <%= book.title %></p>
           <p>Author: <%= book.author %></p>
-          <p>Summary: <%= book.summary %></p>
+          <p>Summary: <%= book.description %></p>
           <a href="/detail/<%= book.id %>">View Details </a>
 
         
